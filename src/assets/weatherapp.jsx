@@ -2,20 +2,27 @@ import { useState } from "react";
 import SearchBox from "./SearchBox";
 import Infobox from "./infobox";
 import "./WeatherApp.css";
+import Forecast from "./Forecast";
 
 export default function WeatherApp() {
-  const [wetherInfo, setWetherInfo] = useState({
-    city: "Pune",
-    feelsLike: 303.78,
-    humidity: 17,
-    temp: 306.01,
-    tempMax: 306.01,
-    tempMin: 303.37,
-    weather: "Clouds",
+  const [weatherInfo, setWeatherInfo] = useState({
+    current: {
+      city: "Hello User😎",
+      feelsLike: 0,
+      humidity: 0,
+      temp: 0,
+      tempMax: 0,
+      tempMin: 0,
+      weather: "",
+    },
+    forecast: [],
   });
 
-  let updateWeatherInfo = (newInfo) => {
-    setWetherInfo(newInfo);
+  let updateWeatherInfo = (newInfo, forecastData) => {
+    setWeatherInfo({
+      current: newInfo,
+      forecast: forecastData,
+    });
   };
 
   return (
@@ -23,7 +30,8 @@ export default function WeatherApp() {
       <div className="app-card">
         <h1>Weather App</h1>
         <SearchBox updateInfo={updateWeatherInfo} />
-        <Infobox info={wetherInfo} />
+        <Infobox info={weatherInfo.current} />
+        <Forecast forecast={weatherInfo.forecast} />
       </div>
     </div>
   );

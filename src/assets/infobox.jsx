@@ -41,7 +41,7 @@ export default function Infobox({ info }) {
             image={
               info.humidity > 80
                 ? RAINY_URL
-                : info.temp > 25
+                : info.temp > 30
                   ? HOT_URL
                   : info.temp < 15
                     ? VERY_COLD_URL

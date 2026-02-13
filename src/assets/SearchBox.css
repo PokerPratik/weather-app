@@ -1,0 +1,65 @@
+/* Center search section */
+.SearchBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Form layout */
+.SearchBox form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* TextField width */
+.SearchBox .MuiTextField-root {
+  width: 280px;
+}
+
+/* Button styling */
+.SearchBox .MuiButton-contained {
+  width: 150px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: 0.3s ease;
+}
+
+/* Button hover effect */
+.SearchBox .MuiButton-contained:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Error message styling */
+.SearchBox p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ========================= */
+/* 📱 Mobile Devices (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+  .SearchBox {
+    padding: 0 10px;
+  }
+
+  .SearchBox form {
+    width: 100%;
+  }
+
+  .SearchBox .MuiTextField-root {
+    width: 100%;
+  }
+
+  .SearchBox .MuiButton-contained {
+    width: 100%;
+  }
+
+  .SearchBox p {
+    font-size: 13px;
+    text-align: center;
+  }
+}

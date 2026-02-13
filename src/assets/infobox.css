@@ -1,0 +1,73 @@
+/* Center container */
+.Infobox {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Optional wrapper */
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Improve MUI Card look */
+.MuiCard-root {
+  border-radius: 15px !important;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.MuiCard-root:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Image styling */
+.MuiCardMedia-root {
+  object-fit: cover;
+}
+
+/* City name styling */
+.MuiTypography-h5 {
+  font-weight: bold !important;
+  margin-bottom: 10px !important;
+}
+
+/* Weather details styling */
+.MuiTypography-body2 {
+  font-size: 15px !important;
+  line-height: 1.8;
+}
+
+/* ========================= */
+/* 📱 Mobile Devices (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+  .Infobox {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  .MuiCard-root {
+    width: 100% !important;
+    border-radius: 10px !important;
+  }
+
+  .MuiTypography-h5 {
+    font-size: 18px !important;
+  }
+
+  .MuiTypography-body2 {
+    font-size: 13px !important;
+    line-height: 1.6;
+  }
+
+  .MuiCardMedia-root {
+    height: 160px !important; /* Smaller image on mobile */
+  }
+}

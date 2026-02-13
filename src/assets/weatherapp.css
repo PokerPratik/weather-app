@@ -1,0 +1,46 @@
+/* Full page layout */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(./HD-Weather-Image.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Center card */
+.app-card {
+  background: rgb(143, 229, 255);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 720px;
+}
+
+/* Title styling */
+.app-card h1 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* ========================= */
+/* 📱 Mobile Devices (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+  .app-container {
+    padding: 15px;
+    background-position: top;
+  }
+
+  .app-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .app-card h1 {
+    font-size: 20px;
+  }
+}

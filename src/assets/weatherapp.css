@@ -25,6 +25,20 @@
   font-weight: bold;
 }
 
+.project-info {
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.project-info p {
+  margin: 6px 0;
+  color: #153243;
+  line-height: 1.5;
+}
+
 /* ========================= */
 /* 📱 Mobile Devices (≤480px) */
 /* ========================= */
@@ -42,5 +56,10 @@
 
   .app-card h1 {
     font-size: 20px;
+  }
+
+  .project-info {
+    padding: 12px 14px;
+    font-size: 14px;
   }
 }

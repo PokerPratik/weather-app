@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SearchBox from "./SearchBox";
 import Infobox from "./infobox";
-import "./WeatherApp.css";
+import "./weatherapp.css";
 import Forecast from "./Forecast";
 
 export default function WeatherApp() {

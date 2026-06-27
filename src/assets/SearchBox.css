@@ -1,65 +1,109 @@
-/* Center search section */
+/* Search section wrapper */
 .SearchBox {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 8px;
 }
 
-/* Form layout */
-.SearchBox form {
+/* Search form */
+.search-form {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 8px 8px 8px 20px;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* TextField width */
-.SearchBox .MuiTextField-root {
-  width: 280px;
+.search-form:focus-within {
+  border-color: rgba(167, 139, 250, 0.7);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
 }
 
-/* Button styling */
-.SearchBox .MuiButton-contained {
-  width: 150px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  transition: 0.3s ease;
-}
-
-/* Button hover effect */
-.SearchBox .MuiButton-contained:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-}
-
-/* Error message styling */
-.SearchBox p {
-  font-size: 14px;
+/* Custom input */
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
 }
 
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+}
+
+/* Search button */
+.search-btn {
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-btn:hover {
+  background: linear-gradient(135deg, #6d28d9, #4f46e5);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+}
+
+.search-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Error message */
+.search-error {
+  text-align: center;
+  margin-top: 10px;
+  color: #fca5a5;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
 /* ========================= */
-/* 📱 Mobile Devices (≤480px) */
+/* 📱 Mobile Devices (≤600px) */
 /* ========================= */
-@media (max-width: 480px) {
-  .SearchBox {
-    padding: 0 10px;
+@media (max-width: 600px) {
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 14px;
+    gap: 10px;
+    border-radius: 14px;
   }
 
-  .SearchBox form {
+  .search-input {
+    font-size: 15px;
     width: 100%;
   }
 
-  .SearchBox .MuiTextField-root {
+  .search-btn {
     width: 100%;
-  }
-
-  .SearchBox .MuiButton-contained {
-    width: 100%;
-  }
-
-  .SearchBox p {
-    font-size: 13px;
-    text-align: center;
+    justify-content: center;
+    padding: 12px;
   }
 }

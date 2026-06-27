@@ -1,80 +1,126 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import { useState, useEffect } from "react";
 import "./infobox.css";
-import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
-import SnowboardingIcon from "@mui/icons-material/Snowboarding";
-import SunnyIcon from "@mui/icons-material/Sunny";
+
+const HOT_URL = "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=3840&q=100&auto=format&fit=crop";
+const COLD_URL = "https://images.unsplash.com/photo-1445543949571-ffc3e0e2f55e?w=3840&q=100&auto=format&fit=crop";
+const RAINY_URL = "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=3840&q=100&auto=format&fit=crop";
+const SNOW_URL = "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=3840&q=100&auto=format&fit=crop";
+const THUNDER_URL = "https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?w=3840&q=100&auto=format&fit=crop";
+const CLOUDY_URL = "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=3840&q=100&auto=format&fit=crop";
+const CLEAR_URL = "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=3840&q=100&auto=format&fit=crop";
+const INIT_URL = "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=3840&q=100&auto=format&fit=crop";
 
 export default function Infobox({ info }) {
-  const INIT_URL =
-    "https://images.unsplash.com/photo-1686487220868-13d19709b784?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  const isDefault = !info.weather;
+  const [time, setTime] = useState(new Date());
 
-  //   let Info = {
-  //     city: "Pune",
-  //     feelsLike: 303.78,
-  //     humidity: 17,
-  //     temp: 306.01,
-  //     tempMax: 306.01,
-  //     tempMin: 303.37,
-  //     weather: "Clouds",
-  //   };
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-  let HOT_URL =
-    "https://tse1.mm.bing.net/th/id/OIP.aGwRkzUjY-pWSUiyBmeM9AHaEo?rs=1&pid=ImgDetMain&o=7&rm=3";
+  let formattedTime = "";
+  let formattedDate = "";
+  
+  try {
+    const formatOptionsTime = { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit',
+      timeZone: info.timezone || undefined
+    };
+    
+    const formatOptionsDate = { 
+      weekday: 'long', 
+      month: 'long', 
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: info.timezone || undefined 
+    };
 
-  let COLD_URL = "https://images4.alphacoders.com/134/thumb-1920-1341445.png";
+    formattedTime = time.toLocaleTimeString([], formatOptionsTime);
+    formattedDate = time.toLocaleDateString([], formatOptionsDate);
+  } catch(e) {
+    // Fallback if timezone string is invalid/unknown
+    formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    formattedDate = time.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
 
-  let RAINY_URL =
-    "https://tse2.mm.bing.net/th/id/OIP.pJ7R6R8vz2YpyDN1eFLLpgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3";
+  const getImage = () => {
+    if (isDefault) return INIT_URL;
 
-  let VERY_COLD_URL =
-    "https://tse1.mm.bing.net/th/id/OIP.5SFUfVxmTPKWGsTvgMNfvwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3";
+    const w = info.weather.toLowerCase();
+    const temp = info.temp;
+    const humidity = info.humidity;
+
+    if (w.includes("thunderstorm")) return THUNDER_URL;
+    if (w.includes("snow") || temp < 2) return SNOW_URL;
+    if (humidity > 80 || w.includes("rain") || w.includes("drizzle")) return RAINY_URL;
+    if (w.includes("overcast") || w.includes("cloud")) return CLOUDY_URL;
+    if (w.includes("clear") && temp > 30) return HOT_URL;
+    if (w.includes("clear") || w.includes("sunny")) return CLEAR_URL;
+    if (temp >= 30) return HOT_URL;
+    if (temp <= 10) return COLD_URL;
+
+    return CLEAR_URL;
+  };
+
+  const stats = [
+    { icon: "🌡️", label: "Feels Like", value: `${Math.round(info.feelsLike)}°C` },
+    { icon: "💧", label: "Humidity", value: `${info.humidity}%` },
+    { icon: "🌬️", label: "Min Temp", value: `${Math.round(info.tempMin)}°C` },
+    { icon: "🔆", label: "Max Temp", value: `${Math.round(info.tempMax)}°C` },
+    { icon: "🌤️", label: "Condition", value: info.weather || "—" },
+    { icon: "📍", label: "City", value: info.city || "—" },
+  ];
 
   return (
     <div className="Infobox">
-      <div className="card-container">
-        <Card sx={{ maxWidth: 800 }}>
-          <CardMedia
-            sx={{ height: 200, width: 700, margin: "0 auto" }}
-            image={
-              info.humidity > 80
-                ? RAINY_URL
-                : info.temp > 30
-                  ? HOT_URL
-                  : info.temp < 15
-                    ? VERY_COLD_URL
-                    : COLD_URL
-            }
-            title="weather image"
-          />
+      {/* Hero image with overlay */}
+      <div className="weather-hero">
+        <img
+          className="weather-hero-img"
+          src={getImage()}
+          alt="weather"
+        />
+        <div className="weather-hero-overlay" />
+        
+        {/* Floating Live Clock */}
+        <div className="live-clock">
+          <div className="clock-time">{formattedTime}</div>
+          <div className="clock-date">{formattedDate}</div>
+        </div>
 
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {info.city}
-              {/* {info.humidity > 80 ? (
-                <ThunderstormIcon />
-              ) : info.temp > 25 ? (
-                <SunnyIcon />
-              ) : info.temp < 15 ? (
-                <AcUnitIcon /> // better for cold weather
-              ) : (
-                <CloudIcon />
-              )} */}
-            </Typography>
-
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              <div>Temperature: {info.temp}&deg;C</div>
-              <div>Feels Like: {info.feelsLike}&deg;C</div>
-              <div>Humidity: {info.humidity}%</div>
-              <div>Min Temp: {info.tempMin}&deg;C</div>
-              <div>Max Temp: {info.tempMax}&deg;C</div>
-              <div>Weather: {info.weather}</div>
-            </Typography>
-          </CardContent>
-        </Card>
+        <div className="weather-hero-content">
+          <div>
+            <div className="weather-city">{info.city}</div>
+            <div 
+              className="weather-condition" 
+              style={{ textTransform: isDefault ? 'none' : 'capitalize' }}
+            >
+              {info.weather || "Search a city to get started"}
+            </div>
+          </div>
+          {!isDefault && (
+            <div className="weather-temp-big">
+              {Math.round(info.temp)}°
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Stats grid */}
+      {!isDefault && (
+        <div className="weather-stats">
+          {stats.slice(0, 5).map((s, i) => (
+            <div className="stat-card" key={i}>
+              <span className="stat-icon">{s.icon}</span>
+              <span className="stat-label">{s.label}</span>
+              <span className="stat-value">{s.value}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

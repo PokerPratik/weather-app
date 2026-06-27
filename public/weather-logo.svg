@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9ca3af"/>
+      <stop offset="100%" stop-color="#4b5563"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdf08a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="15" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Dark Storm Cloud -->
+  <path d="M140 340C95.8 340 60 304.2 60 260C60 219.4 90.3 185.7 130 180.7C143.5 127.5 191.1 88 248 88C312 88 365 135.9 374.3 197.9C407.7 202.4 434 230.8 434 266C434 306.9 400.9 340 360 340H140Z" fill="url(#cloudGrad)" filter="url(#shadow)" />
+
+  <!-- Lightning Bolt striking down -->
+  <path d="M290 190 L220 310 H270 L210 450 L340 270 H270 L310 190 Z" fill="url(#boltGrad)" filter="url(#shadow)"/>
+</svg>
